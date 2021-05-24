@@ -57,7 +57,7 @@ const UserModel = mongoose.model('user', User);
 
 const Product = new mongoose.Schema({
 
-  id :{
+  _id :{
 
       type : String,
       required : [true ,['Id Required']],
