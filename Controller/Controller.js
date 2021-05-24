@@ -7,7 +7,7 @@ exports.signUp = async (req, res) => {
   try {
       const newUser = await User.UserModel.create(req.body);
       res.status(201).json({
-        status: 'success',
+        status: 'Connection success',
         data: {
           newUser,
         },
@@ -26,7 +26,7 @@ exports.viewProducts = async (req, res) => {
     const products = await User.ProductModel.find({});
     if (products.length > 0) {
       res.status(200).json({
-        status: 'success',
+        status: 'Connection success',
         results: products.length,
         data: {
           products,
@@ -35,9 +35,9 @@ exports.viewProducts = async (req, res) => {
     }
     else {
       res.status(400).json({
-        status: 'success',
+        status: 'Connection success',
         data: {
-          message: 'No products available in the repo',
+          message: 'No products available',
         },
       });
     }
@@ -53,10 +53,10 @@ exports.viewProducts = async (req, res) => {
 
  exports.viewProductById = async (req, res) => {
       try {
-        const products = await User.ProductModel.find({_id:req.params.id});
+        const products = await User.ProductModel.find({_id :req.params.id});
         if (products.length > 0) {
           res.status(200).json({
-            status: 'success',
+            status: 'Connection success',
             results: products.length,
             data: {
               products,
@@ -65,9 +65,9 @@ exports.viewProducts = async (req, res) => {
         }
         else {
           res.status(400).json({
-            status: 'success',
+            status: 'Connection success',
             data: {
-              message: 'No products available in the repo',
+              message: 'No products available with given ID',
             },
           });
         }
@@ -80,3 +80,35 @@ exports.viewProducts = async (req, res) => {
         });
       }
         }
+
+        //User.find({$or:[{region: "NA"},{sector:"Some Sector"}]}, function(err, user) 
+
+        exports.viewProductByString = async (req, res) => {
+          try {
+            const products = await User.ProductModel.find({$or:[{name: req.params.search_string},{type:req.params.search_string}]});
+            if (products.length > 0) {
+              res.status(200).json({
+                status: 'Connection success',
+                results: products.length,
+                data: {
+                  products,
+                },
+              });
+            }
+            else {
+              res.status(400).json({
+                status: 'Connection success',
+                data: {
+                  message: 'No products available with given ID',
+                },
+              });
+            }
+          }
+        
+           catch (err) {
+            res.status(404).json({
+              status: 'fail',
+              message: err.errmsg,
+            });
+          }
+            }
