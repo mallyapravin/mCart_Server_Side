@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 mongoose
   .connect('mongodb://localhost:27017/mCartDB', {
+
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
@@ -9,6 +10,10 @@ mongoose
   })
   .then(() => {
     console.log('DB connection successful!');
+  })
+  .catch(error=>{
+
+    console.log(error);
   });
 
   const User = new mongoose.Schema(
@@ -84,6 +89,12 @@ const Product = new mongoose.Schema({
 
   },
 
+  description :{
+
+    type : String,
+
+  },
+
   price :{
 
       type : Number,
@@ -95,7 +106,14 @@ const Product = new mongoose.Schema({
 
       type : Boolean,
 
-  }
+  },
+
+  image_name :{
+
+    type : String,
+
+}
+
 
 },
 
