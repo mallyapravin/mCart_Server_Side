@@ -85,7 +85,7 @@ exports.viewProducts = async (req, res) => {
 
         exports.viewProductByString = async (req, res) => {
           try {
-            const products = await User.ProductModel.find({$or:[{name: req.params.search_string},{type:req.params.search_string}]});
+            const products = await User.ProductModel.find({$or:[{name: req.params.search_string},{type:req.params.search_string},{brand:req.params.search_string}]});
             if (products.length > 0) {
               res.status(200).json({
                 status: 'Connection success',
