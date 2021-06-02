@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+//cmd to start mongodb:  mongod.exe --dbpath c:\data\db
 mongoose
   .connect('mongodb://localhost:27017/mCartDB', {
 
